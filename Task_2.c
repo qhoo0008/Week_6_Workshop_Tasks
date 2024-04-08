@@ -97,9 +97,12 @@ void inOrder(struct node* treePtr)
 	}
 }
 
-void delete_tree(struct node** treePtr)
+void delete_tree(struct node **treePtr)
 {
-       free(*treePtr);
-	   delete_tree(&((*treePtr)->leftPtr));
-       delete_tree(&((*treePtr)->rightPtr));
+    if (*treePtr != NULL) {
+        delete_tree(&((*treePtr)->leftPtr));
+        delete_tree(&((*treePtr)->rightPtr));
+        free(*treePtr);
+        *treePtr = NULL; // Setting the pointer to NULL after freeing the memory
+    }
 }
